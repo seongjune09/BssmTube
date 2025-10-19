@@ -6,6 +6,7 @@ export default function VideoPlayer() {
   const [isPlaying, setIsPlaying] = useState(false);
   const [isMuted, setIsMuted] = useState(false);
   const [isScreen, setIsScreen] = useState(false);
+  const [isGudock, setIsGudock] = useState(true);
   const [resolutionMenuOpen, setResolutionMenuOpen] = useState(false);
   const [selectedResolution, setSelectedResolution] = useState("720"); 
   const resolutions = ["360", "480", "720", "1080"];
@@ -25,6 +26,10 @@ export default function VideoPlayer() {
     const video = videoRef.current;
     video.muted = !video.muted;
     setIsMuted(video.muted); 
+  };
+
+  const toggleGudock = () => {
+    setIsGudock(!isGudock);
   };
 
   const toggleFullscreen = () => {
@@ -142,7 +147,10 @@ export default function VideoPlayer() {
       <div className="Title-container">
         <img className="Bssm-img" src="./Bssm.svg" alt="Bssm" />
         <h2 className="Video-Title">2025 부산SW마이스터고 홍보영상</h2>
-        <button className="gudock-btn">구독</button>
+        
+        <button onClick={toggleGudock} className={`gudock-btn ${isGudock ? "subscribed" : "subscribe"}`}> {isGudock ? "구독" : "구독중"}
+        <img></img></button> 
+
         <button className="like-btn"><img className="like-img" src="./like.svg" alt="like"/></button>
         <button className="unlike-btn"><img className="unlike-img" src="./unlike.svg" alt="unlike"/></button>
         <button className="flag-btn"><img className="flag-img" src="./flag.png" alt="flag"/>신고</button>
