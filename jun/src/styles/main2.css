@@ -1,0 +1,171 @@
+.logo-container {
+    position: fixed; 
+    top: 10px;      
+    left: 30px;      
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    background-color: rgba(255, 255, 255, 0.8); 
+    padding: 5px 10px;
+    border-radius: 8px;
+}
+  
+.Tube-img {
+    width: 100px;
+    height: auto;
+}
+  
+.YouTube {
+    margin: 0;
+    font-size: 3em;
+}
+  
+.KR {
+    margin: 0;
+    font-size: 14px;
+    color: gray;
+}
+
+.video-wrapper {
+    margin-top: 20px;
+    margin-left: 50px;
+    width: 1400px;
+    aspect-ratio: 16 / 9; 
+}
+  
+.Video {
+    width: 100%;
+    height: 97%;
+    display: block;
+    border-radius: 15px;
+    object-fit: cover; 
+}
+
+.Title-container {
+    position: fixed; 
+    top: 920px;      
+    left: 40px;      
+    display: flex;
+    align-items: center;
+    gap: 15px;
+    padding: 5px 10px;
+    border-radius: 8px;
+}
+
+.Video-Title {
+    font-size : 30px;
+}
+
+.Bssm-img {
+    width : 60px;
+
+}
+
+.gudock-btn {
+    background-color: rgb(56, 56, 56);
+    border-radius: 70px;
+    color : rgb(255, 255, 255);
+}
+
+.like-img {
+    width : 20px;
+}
+
+.unlike-img {
+    width : 20px;
+}
+
+.flag-img {
+    width : 20px;
+}
+
+.like-btn {
+    background-color: white;
+    margin-left : 570px;
+}
+
+.unlike-btn {
+    background-color: white;
+}
+
+.flag-btn {
+    background-color: white;
+}
+
+.video-container {
+    position: relative;      
+    width: 900px;
+    margin: 50px auto;
+    border-radius: 15px;
+    overflow: hidden;
+  }
+  
+  .Video {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    display: block;
+  }
+  
+  .video-controls {
+    position: absolute;
+    bottom: 126px;           
+    left: 1220px;
+    display: flex;
+    gap: 10px;
+    background-color: rgba(0, 0, 0, 0.4); 
+    padding: 3px 4px;
+    border-radius: 10px;
+  }
+  
+  .video-controls button {
+    background: none;
+    border: none;
+    color: white;
+    font-size: 10px;
+    cursor: pointer;
+    transition: 0.2s;
+  }
+  
+  .video-controls button:hover {
+    transform: scale(1.2);
+  }
+
+.Mute {
+    width : 40px;
+}
+
+.UnMute {
+    width : 42px;
+}
+
+.Resolution {
+    width : 40px;
+}
+
+.FullScreen {
+    width : 40px;
+}
+
+.resolution-menu {
+  position: absolute;
+  bottom: 100%; /* 버튼 위로 위치 */
+  left: 0;
+  background: #333;
+  color: #fff;
+  border: 1px solid #666;
+  border-radius: 4px;
+  width: 60px;
+  z-index: 10;
+  margin-bottom: 5px; /* 버튼과 간격 */
+}
+
+.resolution-item {
+  padding: 5px;
+  cursor: pointer;
+}
+
+.resolution-item:hover,
+.resolution-item.active {
+  background: #555;
+}

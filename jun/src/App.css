@@ -146,3 +146,26 @@
 .FullScreen {
     width : 40px;
 }
+
+.resolution-menu {
+  position: absolute;
+  bottom: 100%; /* 버튼 위로 위치 */
+  left: 0;
+  background: #333;
+  color: #fff;
+  border: 1px solid #666;
+  border-radius: 4px;
+  width: 60px;
+  z-index: 10;
+  margin-bottom: 5px; /* 버튼과 간격 */
+}
+
+.resolution-item {
+  padding: 5px;
+  cursor: pointer;
+}
+
+.resolution-item:hover,
+.resolution-item.active {
+  background: #555;
+}
