@@ -1,12 +1,14 @@
 import { useRef, useState, useEffect } from "react";
 import "./APP.css";
 
-
 export default function VideoPlayer() {
   const videoRef = useRef(null);
   const [isPlaying, setIsPlaying] = useState(false);
   const [isMuted, setIsMuted] = useState(false);
-  const [isScreen, setIsScreen] = useState();
+  const [isScreen, setIsScreen] = useState(false);
+  const [resolutionMenuOpen, setResolutionMenuOpen] = useState(false);
+  const [selectedResolution, setSelectedResolution] = useState("720"); 
+  const resolutions = ["360", "480", "720", "1080"];
 
   const togglePlay = () => {
     const video = videoRef.current;
@@ -36,6 +38,16 @@ export default function VideoPlayer() {
     }
   };
 
+  const handleResolutionSelect = (res) => {
+    setSelectedResolution(res);
+    setResolutionMenuOpen(false);
+
+    const currentTime = videoRef.current.currentTime;
+    videoRef.current.src = `/홍보영상_${res}.mp4`;
+    videoRef.current.currentTime = currentTime;
+    videoRef.current.play(); 
+  };
+
   useEffect(() => {
     const handleKeyDown = (e) => {
       const video = videoRef.current;
@@ -56,6 +68,10 @@ export default function VideoPlayer() {
           e.preventDefault();
           video.volume = Math.min(video.volume + 0.1, 1);
           break;
+        case "ArrowDown": 
+          e.preventDefault();
+          video.volume = Math.max(video.volume - 0.1, 0);
+          break;
         case "KeyM": 
           e.preventDefault();
           toggleMute();
@@ -64,10 +80,6 @@ export default function VideoPlayer() {
           e.preventDefault();
           toggleFullscreen();
           break;
-        case "ArrowDown": 
-          e.preventDefault();
-          video.volume = Math.max(video.volume - 0.1, 0);
-          break;
         default:
           break;
       }
@@ -75,9 +87,7 @@ export default function VideoPlayer() {
 
     window.addEventListener("keydown", handleKeyDown);
     return () => window.removeEventListener("keydown", handleKeyDown);
-  }, [isPlaying]);
-
-  
+  }, [isPlaying, isMuted]);
 
   return (
     <div style={{ textAlign: "center" }}>
@@ -88,9 +98,10 @@ export default function VideoPlayer() {
       </div>
 
       <div className="video-wrapper">
-        <video className = "Video"
+        <video
+          className="Video"
           ref={videoRef}
-          src="/홍보영상(720).mp4"
+          src={`/홍보영상_${selectedResolution}.mp4`}
           type="video/mp4"
         />
       </div>
@@ -103,29 +114,38 @@ export default function VideoPlayer() {
             <img className="UnMute" src="./UnMute.png" alt="UnMute" />
           )}
         </button>
-        <button><img className = "Setting" src = "./Setting.png"></img></button>
-        <button onClick={() => videoRef.current.requestFullscreen()}><img className = "FullScreen" src = "./FullScreen.png"></img></button>
+
+        <div style={{ position: "relative", display: "inline-block" }}>
+          <button onClick={() => setResolutionMenuOpen(!resolutionMenuOpen)}>
+            <img className="Resolution" src="./Resolution.png" alt="Resolution" />
+          </button>
+          {resolutionMenuOpen && (
+            <div className="resolution-menu">
+              {resolutions.map((res) => (
+                <div
+                  key={res}
+                  className={`resolution-item ${selectedResolution === res ? "active" : ""}`}
+                  onClick={() => handleResolutionSelect(res)}
+                >
+                  {res}p
+                </div>
+              ))}
+            </div>
+          )}
+        </div>
+
+        <button onClick={toggleFullscreen}>
+          <img className="FullScreen" src="./FullScreen.png" alt="Fullscreen" />
+        </button>
       </div>
 
-      {/* <div>
-        <button onClick={() => videoRef.current.play()}>재생</button>
-        <button onClick={() => videoRef.current.pause()}>멈춤</button>
-        <button onClick={() => videoRef.current.volume = 1}>볼륨 max</button>
-        <button onClick={() => videoRef.current.muted = true}>음소거</button>
-        <button onClick={() => videoRef.current.playbackRate = 2}>2배속</button>
-        <button onClick={() => videoRef.current.playbackRate = 0.5}>0.5배속</button>
-        <button onClick={() => videoRef.current.requestFullscreen()}>전체화면</button>
-      </div> */}
-
-
-      <div className = "Title-container">
-        <img className = "Bssm-img" src = "./Bssm.svg"></img>
-        <h2 className = "Video-Title">2025 부산SW마이스터고 홍보영상</h2>
-        <button className = "gudock-btn">구독</button>
-        <button className = "like-btn"><img className = "like-img" src = "./like.svg"></img></button>
-        <button className = "unlike-btn"><img className = "unlike-img" src = "./unlike.svg"></img></button>
-        <button className = "flag-btn"><img className = "flag-img" src = "./flag.png"></img>신고</button>
-        
+      <div className="Title-container">
+        <img className="Bssm-img" src="./Bssm.svg" alt="Bssm" />
+        <h2 className="Video-Title">2025 부산SW마이스터고 홍보영상</h2>
+        <button className="gudock-btn">구독</button>
+        <button className="like-btn"><img className="like-img" src="./like.svg" alt="like"/></button>
+        <button className="unlike-btn"><img className="unlike-img" src="./unlike.svg" alt="unlike"/></button>
+        <button className="flag-btn"><img className="flag-img" src="./flag.png" alt="flag"/>신고</button>
       </div>
     </div>
   );

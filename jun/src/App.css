@@ -93,7 +93,7 @@
 }
 
 .video-container {
-    position: relative;      /* 내부 요소의 absolute 기준점 */
+    position: relative;      
     width: 900px;
     margin: 50px auto;
     border-radius: 15px;
@@ -139,7 +139,7 @@
     width : 42px;
 }
 
-.Setting {
+.Resolution {
     width : 40px;
 }
 
