@@ -8,10 +8,10 @@ export default function VideoPlayer() {
   const [isScreen, setIsScreen] = useState(false);
   const [isGudock, setIsGudock] = useState(true);
   const [resolutionMenuOpen, setResolutionMenuOpen] = useState(false);
-  const [selectedResolution, setSelectedResolution] = useState("720"); 
+  const [selectedResolution, setSelectedResolution] = useState("720");
   const resolutions = ["360", "480", "720", "1080"];
   const [likeCount, setLikeCount] = useState(2.6);
-  const [isLike, setIsLike] = useState(true);
+  const [isLiked, setIsLiked] = useState(false); 
   const [Flag, setFlag] = useState(false);
 
   const togglePlay = () => {
@@ -28,21 +28,10 @@ export default function VideoPlayer() {
   const toggleMute = () => {
     const video = videoRef.current;
     video.muted = !video.muted;
-    setIsMuted(video.muted); 
+    setIsMuted(video.muted);
   };
 
-  const toggleGudock = () => {
-    setIsGudock(!isGudock);
-  };
-
-  const toggleLike = () => {
-    setIsLike(!isLike);
-  };
-
-  const toggleFlag = () => {
-    setFlag(!Flag);
-  };
-
+  const toggleGudock = () => setIsGudock(!isGudock);
 
   const toggleFullscreen = () => {
     const video = videoRef.current;
@@ -56,15 +45,34 @@ export default function VideoPlayer() {
   };
 
   const handleResolutionSelect = (res) => {
+    const video = videoRef.current;
+    const currentTime = video.currentTime;
+
+    video.src = `/홍보영상_${res}.mp4`;
+    video.load();
+
+    video.onloadedmetadata = () => {
+      video.currentTime = currentTime;
+      video.play();
+    };
+
     setSelectedResolution(res);
     setResolutionMenuOpen(false);
-
-    const currentTime = videoRef.current.currentTime;
-    videoRef.current.src = `/홍보영상_${res}.mp4`;
-    videoRef.current.currentTime = currentTime;
-    videoRef.current.play(); 
   };
 
+  const handleLike = () => {
+    if (!isLiked) {
+      setIsLiked(true);
+      setLikeCount(2.7);
+    }
+  };
+
+  const handleUnlike = () => {
+    if (isLiked) {
+      setIsLiked(false);
+      setLikeCount(2.6);
+    }
+  };
 
   useEffect(() => {
     const handleKeyDown = (e) => {
@@ -72,25 +80,25 @@ export default function VideoPlayer() {
       if (!video) return;
 
       switch (e.code) {
-        case "Space": 
+        case "Space":
           e.preventDefault();
           togglePlay();
           break;
-        case "ArrowLeft": 
+        case "ArrowLeft":
           video.currentTime = Math.max(video.currentTime - 5, 0);
           break;
-        case "ArrowRight": 
+        case "ArrowRight":
           video.currentTime = Math.min(video.currentTime + 5, video.duration);
           break;
-        case "ArrowUp": 
+        case "ArrowUp":
           e.preventDefault();
           video.volume = Math.min(video.volume + 0.1, 1);
           break;
-        case "ArrowDown": 
+        case "ArrowDown":
           e.preventDefault();
           video.volume = Math.max(video.volume - 0.1, 0);
           break;
-        case "KeyM": 
+        case "KeyM":
           e.preventDefault();
           toggleMute();
           break;
@@ -105,12 +113,12 @@ export default function VideoPlayer() {
 
     window.addEventListener("keydown", handleKeyDown);
     return () => window.removeEventListener("keydown", handleKeyDown);
-  }, [isPlaying, isMuted]);
+  }, []);
 
   return (
     <div style={{ textAlign: "center" }}>
       <div className="logo-container">
-        <img className="Tube-img" src='./BsTube.png' alt="Tube" />
+        <img className="Tube-img" src="./BsTube.png" alt="Tube" />
         <h2 className="YouTube">BssmTube</h2>
         <p className="KR">KR</p>
       </div>
@@ -160,49 +168,45 @@ export default function VideoPlayer() {
       <div className="Title-container">
         <img className="Bssm-img" src="./Bssm.svg" alt="Bssm" />
         <h2 className="Video-Title">2025 부산SW마이스터고 홍보영상</h2>
-        
+
         <button
           onClick={toggleGudock}
           className={`gudock-btn ${isGudock ? "subscribed" : "subscribe"}`}
         >
           {isGudock ? (
-        "구독"
-      ) : (
-        <>
-          구독중 <img className="Bell-img" src="Bell.png" alt="벨" />
-        </>
-       )}
-      </button>
+            <>
+              구독중 <img className="Bell-img" src="Bell.png" alt="벨" />
+            </>
+          ) : (
+            "구독"
+          )}
+        </button>
 
-      <button
-        className={`like-btn ${isLike ? "like" : "liked"}`}
-        onClick={() => {
-          setIsLike(!isLike);
-          setLikeCount(prev => (prev < 2.7 ? prev + 0.1 : prev));
-        }}
-      >
-        <img className="like-img" src="./like.png " alt="like" />
-        {likeCount.toFixed(1)}만
-      </button>
-      
-      
-      <button
-        className="unlike-btn"
-        onClick={() => {
-          setIsLike(false);
-          setLikeCount(prev => (prev > 2.6 ? prev - 0.1 : prev)); 
-        }}
-      >
-        <img className="unlike-img" src="./unlike.svg" alt="unlike" />
-      </button>
+        <button
+          className={`like-btn ${isLiked ? "liked" : "like"}`}
+          onClick={handleLike}
+        >
+          <img className="like-img" src="./like.png" alt="like" />
+          {likeCount.toFixed(1)}만
+        </button>
 
-        <button 
+        <button className="unlike-btn" onClick={handleUnlike}>
+          <img className="unlike-img" src="./unlike.svg" alt="unlike" />
+        </button>
+
+        <button
           className="flag-btn"
-          onClick={() => { setFlag(true); alert("신고 접수를 완료하였습니다 !")}}>
-            <img className="flag-img" src="./flag.png" alt="flag"/>신고</button>
-
-
-
+          onClick={() => {
+            if (!Flag) {
+              setFlag(true);
+              alert("신고가 접수되었습니다 !");
+            } else {
+              alert("이미 신고가 접수되었습니다 !!");
+            }
+          }}
+        >
+          <img className="flag-img" src="./flag.png" alt="flag" />신고
+        </button>
       </div>
     </div>
   );
