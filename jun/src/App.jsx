@@ -10,6 +10,8 @@ export default function VideoPlayer() {
   const [resolutionMenuOpen, setResolutionMenuOpen] = useState(false);
   const [selectedResolution, setSelectedResolution] = useState("720"); 
   const resolutions = ["360", "480", "720", "1080"];
+  const [likeCount, setLikeCount] = useState(2.6);
+  const [isLike, setIsLike] = useState(true);
 
   const togglePlay = () => {
     const video = videoRef.current;
@@ -32,6 +34,10 @@ export default function VideoPlayer() {
     setIsGudock(!isGudock);
   };
 
+  const toggleLike = () => {
+    setIsLike(!isLike);
+  };
+
   const toggleFullscreen = () => {
     const video = videoRef.current;
     if (!document.fullscreenElement) {
@@ -52,6 +58,7 @@ export default function VideoPlayer() {
     videoRef.current.currentTime = currentTime;
     videoRef.current.play(); 
   };
+
 
   useEffect(() => {
     const handleKeyDown = (e) => {
@@ -148,12 +155,36 @@ export default function VideoPlayer() {
         <img className="Bssm-img" src="./Bssm.svg" alt="Bssm" />
         <h2 className="Video-Title">2025 부산SW마이스터고 홍보영상</h2>
         
-        <button onClick={toggleGudock} className={`gudock-btn ${isGudock ? "subscribed" : "subscribe"}`}> {isGudock ? "구독" : "구독중"}
-        <img></img></button> 
+        <button
+          onClick={toggleGudock}
+          className={`gudock-btn ${isGudock ? "subscribed" : "subscribe"}`}
+        >
+          {isGudock ? (
+        "구독"
+      ) : (
+        <>
+          구독중 <img className="Bell-img" src="Bell.png" alt="벨" />
+        </>
+       )}
+      </button>
 
-        <button className="like-btn"><img className="like-img" src="./like.svg" alt="like"/></button>
+      <button
+        className={`like-btn ${isLike ? "like" : "liked"}`}
+        onClick={() => {
+          setIsLike(!isLike);
+          setLikeCount(prev => (prev < 2.7 ? prev + 0.1 : prev));
+        }}
+      >
+        <img className="like-img" src="./like.png " alt="like" />
+        {likeCount.toFixed(1)}만
+      </button>
+      
+      
         <button className="unlike-btn"><img className="unlike-img" src="./unlike.svg" alt="unlike"/></button>
         <button className="flag-btn"><img className="flag-img" src="./flag.png" alt="flag"/>신고</button>
+
+
+
       </div>
     </div>
   );

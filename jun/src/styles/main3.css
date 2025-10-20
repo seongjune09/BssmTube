@@ -11,7 +11,7 @@
 }
   
 .Tube-img {
-    width: 100px;
+    width: 90px;
     height: auto;
 }
   
@@ -27,9 +27,9 @@
 }
 
 .video-wrapper {
-    margin-top: 20px;
+    margin-top: 0px;
     margin-left: 50px;
-    width: 1400px;
+    width: 1100px;
     aspect-ratio: 16 / 9; 
 }
   
@@ -43,8 +43,8 @@
 
 .Title-container {
     position: fixed; 
-    top: 920px;      
-    left: 40px;      
+    top: 730px;      
+    left: 50px;      
     display: flex;
     align-items: center;
     gap: 15px;
@@ -53,7 +53,7 @@
 }
 
 .Video-Title {
-    font-size : 30px;
+    font-size : 27px;
 }
 
 .Bssm-img {
@@ -62,10 +62,25 @@
 }
 
 .gudock-btn {
-    background-color: rgb(56, 56, 56);
     border-radius: 70px;
-    color : rgb(255, 255, 255);
-}
+    color: white;
+    width: 100px;
+    height: 40px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    font-weight: bold;
+    border: none;
+  }
+  
+  .gudock-btn.subscribe {      
+    background-color: rgb(130, 130, 130);
+  }
+  
+  .gudock-btn.subscribed {     
+    background-color: rgb(56, 56, 56);
+  }
 
 .like-img {
     width : 20px;
@@ -81,7 +96,7 @@
 
 .like-btn {
     background-color: white;
-    margin-left : 570px;
+    margin-left : 270px;
 }
 
 .unlike-btn {
@@ -109,8 +124,8 @@
   
   .video-controls {
     position: absolute;
-    bottom: 126px;           
-    left: 1220px;
+    bottom: 130px;           
+    left: 940px;
     display: flex;
     gap: 10px;
     background-color: rgba(0, 0, 0, 0.4); 
@@ -132,19 +147,19 @@
   }
 
 .Mute {
-    width : 40px;
+    width : 30px;
 }
 
 .UnMute {
-    width : 42px;
+    width : 32px;
 }
 
 .Resolution {
-    width : 40px;
+    width : 30px;
 }
 
 .FullScreen {
-    width : 40px;
+    width : 30px;
 }
 
 .resolution-menu {
@@ -155,7 +170,7 @@
   color: #fff;
   border: 1px solid #666;
   border-radius: 4px;
-  width: 60px;
+  width: 50px;
   z-index: 10;
   margin-bottom: 5px; /* 버튼과 간격 */
 }
