@@ -12,6 +12,7 @@ export default function VideoPlayer() {
   const resolutions = ["360", "480", "720", "1080"];
   const [likeCount, setLikeCount] = useState(2.6);
   const [isLike, setIsLike] = useState(true);
+  const [Flag, setFlag] = useState(false);
 
   const togglePlay = () => {
     const video = videoRef.current;
@@ -37,6 +38,11 @@ export default function VideoPlayer() {
   const toggleLike = () => {
     setIsLike(!isLike);
   };
+
+  const toggleFlag = () => {
+    setFlag(!Flag);
+  };
+
 
   const toggleFullscreen = () => {
     const video = videoRef.current;
@@ -180,8 +186,20 @@ export default function VideoPlayer() {
       </button>
       
       
-        <button className="unlike-btn"><img className="unlike-img" src="./unlike.svg" alt="unlike"/></button>
-        <button className="flag-btn"><img className="flag-img" src="./flag.png" alt="flag"/>신고</button>
+      <button
+        className="unlike-btn"
+        onClick={() => {
+          setIsLike(false);
+          setLikeCount(prev => (prev > 2.6 ? prev - 0.1 : prev)); 
+        }}
+      >
+        <img className="unlike-img" src="./unlike.svg" alt="unlike" />
+      </button>
+
+        <button 
+          className="flag-btn"
+          onClick={() => { setFlag(true); alert("신고 접수를 완료하였습니다 !")}}>
+            <img className="flag-img" src="./flag.png" alt="flag"/>신고</button>
 
 
 
