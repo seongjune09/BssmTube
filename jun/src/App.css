@@ -5,13 +5,12 @@
     display: flex;
     align-items: center;
     gap: 12px;
-    background-color: rgba(255, 255, 255, 0.8); 
     padding: 5px 10px;
     border-radius: 8px;
 }
   
 .Tube-img {
-    width: 90px;
+    width: 80px;
     height: auto;
 }
   
@@ -75,15 +74,19 @@
   }
   
   .gudock-btn.subscribe {      
-    background-color: rgb(130, 130, 130);
+    background-color: rgb(56, 56, 56);
   }
   
   .gudock-btn.subscribed {     
-    background-color: rgb(56, 56, 56);
+    background-color: rgb(130, 130, 130);
   }
 
 .like-img {
     width : 20px;
+}
+
+.unlike-img {
+  width : 20px;
 }
 
 .like-btn.like {      
@@ -94,8 +97,12 @@
     background-color: rgb(56, 56, 56);
   }
 
-.unlike-img {
-    width : 20px;
+.unlike-btn.unlike {
+  background-color: rgb(248, 248, 248);
+}
+
+.unlike-btn.unliked {
+  background-color: rgb(56, 56, 56);
 }
 
 .flag-img {
@@ -195,4 +202,34 @@
 
 .Bell-img {
     width : 20px;
+}
+
+.Video1 img,
+.Video2 img,
+.Video3 img {
+  width: 281px;
+  border-radius: 10px;
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+  cursor: pointer;
+}
+
+.Video1:hover img,
+.Video2:hover img,
+.Video3:hover img {
+  transform: scale(1.05);
+  box-shadow: 0 8px 16px rgba(0, 0, 0, 0.3);
+}
+
+.Video1:hover p,
+.Video2:hover p,
+.Video3:hover p {
+  color: #0073ff;
+  font-weight: bold;
+  transition: color 0.3s ease, font-weight 0.3s ease;
+}
+
+.Mascot {
+  width : 30px;
+  height : 50px;
+  margin-left : 980px;
 }

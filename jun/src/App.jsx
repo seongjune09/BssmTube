@@ -6,19 +6,20 @@ export default function VideoPlayer() {
   const [isPlaying, setIsPlaying] = useState(false);
   const [isMuted, setIsMuted] = useState(false);
   const [isScreen, setIsScreen] = useState(false);
-  const [isGudock, setIsGudock] = useState(true);
+  const [isGudock, setIsGudock] = useState(false);
   const [resolutionMenuOpen, setResolutionMenuOpen] = useState(false);
   const [selectedResolution, setSelectedResolution] = useState("720");
   const resolutions = ["360", "480", "720", "1080"];
   const [likeCount, setLikeCount] = useState(2.6);
   const [isLiked, setIsLiked] = useState(false); 
+  const [isUnliked, setIsUnliked] = useState(false); 
   const [Flag, setFlag] = useState(false);
 
   const togglePlay = () => {
     const video = videoRef.current;
     if (video.paused) {
       video.play();
-      setIsPlaying(true);
+      setIsPlaying(true); 
     } else {
       video.pause();
       setIsPlaying(false);
@@ -61,16 +62,25 @@ export default function VideoPlayer() {
   };
 
   const handleLike = () => {
-    if (!isLiked) {
-      setIsLiked(true);
-      setLikeCount(2.7);
-    }
-  };
-
-  const handleUnlike = () => {
     if (isLiked) {
       setIsLiked(false);
       setLikeCount(2.6);
+    } else {
+      setIsLiked(true);
+      setIsUnliked(false);
+      setLikeCount(2.7);
+    }
+  };
+  
+  const handleUnlike = () => {
+    if (isUnliked) {
+      setIsUnliked(false);
+    } else {
+      setIsUnliked(true);
+      if (isLiked) {
+        setIsLiked(false);
+        setLikeCount(2.6);
+      }
     }
   };
 
@@ -121,8 +131,20 @@ export default function VideoPlayer() {
         <img className="Tube-img" src="./BsTube.png" alt="Tube" />
         <h2 className="YouTube">BssmTube</h2>
         <p className="KR">KR</p>
+        <button className = "Mascot-btn" >
+          <img className="Mascot" src="./Mascot.png" alt="Mascot"/>
+        </button>
       </div>
 
+    <div
+      className="video-section"
+      style={{
+        display: "flex",
+        justifyContent: "center",
+        alignItems: "flex-start",
+        gap: "20px",
+      }}
+    >
       <div className="video-wrapper">
         <video
           className="Video"
@@ -131,6 +153,45 @@ export default function VideoPlayer() {
           type="video/mp4"
         />
       </div>
+
+      <div
+        className="side-videos"
+        style={{
+          display: "flex",
+          flexDirection: "column",
+          gap: "10px",
+        }}
+      >
+
+        <div className="Video1">
+          <img
+            src="./Video1.png"
+            alt="Video1"
+            style={{ width: "281px", borderRadius: "10px" }}
+          />
+          <p>2025 BSSM 졸업작품전</p>
+        </div>
+
+        <div className="Video2">
+          <img
+            src="./Video2.png"
+            alt="Video2"
+            style={{ width: "281px", borderRadius: "10px" }}
+          />
+          <p>2025 BSSM 졸업작품 홍보 영상</p>
+        </div>
+
+        <div className="Video3">
+          <img
+            src="./Video3.png"
+            alt="Video3"
+            style={{ width: "281px", borderRadius: "10px" }}
+          />
+          <p>2021 BSSM 홍보 영상</p>
+        </div>
+
+      </div>
+    </div>
 
       <div className="video-controls">
         <button onClick={toggleMute}>
@@ -182,17 +243,21 @@ export default function VideoPlayer() {
           )}
         </button>
 
-        <button
-          className={`like-btn ${isLiked ? "liked" : "like"}`}
-          onClick={handleLike}
-        >
-          <img className="like-img" src="./like.png" alt="like" />
-          {likeCount.toFixed(1)}만
-        </button>
+          <button
+            className={`like-btn ${isLiked ? "liked" : "like"}`}
+            onClick={handleLike}
+          >
+            <img className="like-img" src="./like.png" alt="like" />
+            {likeCount.toFixed(1)}만
+          </button>
 
-        <button className="unlike-btn" onClick={handleUnlike}>
-          <img className="unlike-img" src="./unlike.svg" alt="unlike" />
-        </button>
+
+          <button
+            className={`unlike-btn ${isUnliked ? "unliked" : "unlike"}`}
+            onClick={handleUnlike}
+          >
+            <img className="unlike-img" src=" /Unlike.png" alt="unlike" />
+          </button>
 
         <button
           className="flag-btn"
@@ -208,6 +273,10 @@ export default function VideoPlayer() {
           <img className="flag-img" src="./flag.png" alt="flag" />신고
         </button>
       </div>
+
+  
+
+
     </div>
   );
 }
