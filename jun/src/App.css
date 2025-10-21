@@ -140,7 +140,7 @@
   .video-controls {
     position: absolute;
     bottom: 130px;           
-    left: 940px;
+    left: 880px;
     display: flex;
     gap: 10px;
     background-color: rgba(0, 0, 0, 0.4); 
@@ -179,7 +179,7 @@
 
 .resolution-menu {
   position: absolute;
-  bottom: 100%; /* 버튼 위로 위치 */
+  bottom: 100%; 
   left: 0;
   background: #333;
   color: #fff;
@@ -187,7 +187,7 @@
   border-radius: 4px;
   width: 50px;
   z-index: 10;
-  margin-bottom: 5px; /* 버튼과 간격 */
+  margin-bottom: 5px;
 }
 
 .resolution-item {
@@ -228,8 +228,44 @@
   transition: color 0.3s ease, font-weight 0.3s ease;
 }
 
-.Mascot {
-  width : 30px;
-  height : 50px;
+.Mascot-btn {
+  background-color: white;
+  border: none; 
+  padding: 0; 
+  cursor: pointer; 
+  display: inline-block;
   margin-left : 980px;
+}
+
+.Mascot-btn img {
+  width: 30px; 
+  height: 50px;
+  display: block; 
+}
+
+.speed-menu {
+  position: absolute;
+  bottom: 100%; 
+  left: 0;
+  background: #333;
+  color: #fff;
+  border: 1px solid #666;
+  border-radius: 4px;
+  width: 50px;
+  z-index: 10;
+  margin-bottom: 5px;
+}
+
+.speed-item {
+  padding: 5px;
+  cursor: pointer;
+}
+
+.speed-item:hover,
+.speed-item.active {
+  background: #555;
+}
+
+.Time {
+  width : 30px;
 }

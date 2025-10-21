@@ -11,15 +11,19 @@ export default function VideoPlayer() {
   const [selectedResolution, setSelectedResolution] = useState("720");
   const resolutions = ["360", "480", "720", "1080"];
   const [likeCount, setLikeCount] = useState(2.6);
-  const [isLiked, setIsLiked] = useState(false); 
-  const [isUnliked, setIsUnliked] = useState(false); 
+  const [isLiked, setIsLiked] = useState(false);
+  const [isUnliked, setIsUnliked] = useState(false);
   const [Flag, setFlag] = useState(false);
+  const [currentVideo, setCurrentVideo] = useState("홍보영상");
+  const [speedMenuOpen, setSpeedMenuOpen] = useState(false);
+  const [selectedSpeed, setSelectedSpeed] = useState(1.0);
+  const speeds = [0.5, 1.0, 1.25, 1.5, 2.0];
 
   const togglePlay = () => {
     const video = videoRef.current;
     if (video.paused) {
       video.play();
-      setIsPlaying(true); 
+      setIsPlaying(true);
     } else {
       video.pause();
       setIsPlaying(false);
@@ -49,7 +53,7 @@ export default function VideoPlayer() {
     const video = videoRef.current;
     const currentTime = video.currentTime;
 
-    video.src = `/홍보영상_${res}.mp4`;
+    video.src = `/${currentVideo}_${res}.mp4`;
     video.load();
 
     video.onloadedmetadata = () => {
@@ -71,7 +75,7 @@ export default function VideoPlayer() {
       setLikeCount(2.7);
     }
   };
-  
+
   const handleUnlike = () => {
     if (isUnliked) {
       setIsUnliked(false);
@@ -82,6 +86,28 @@ export default function VideoPlayer() {
         setLikeCount(2.6);
       }
     }
+  };
+
+  const changeVideo = (name) => {
+    const video = videoRef.current;
+    const currentTime = 0;
+
+    setCurrentVideo(name);
+    video.src = `/${name}_${selectedResolution}.mp4`;
+    video.load();
+
+    video.onloadedmetadata = () => {
+      video.currentTime = currentTime;
+      video.play();
+      setIsPlaying(true);
+    };
+  };
+
+  const handleSpeedSelect = (speed) => {
+    const video = videoRef.current;
+    video.playbackRate = speed;
+    setSelectedSpeed(speed);
+    setSpeedMenuOpen(false);
   };
 
   useEffect(() => {
@@ -131,67 +157,78 @@ export default function VideoPlayer() {
         <img className="Tube-img" src="./BsTube.png" alt="Tube" />
         <h2 className="YouTube">BssmTube</h2>
         <p className="KR">KR</p>
-        <button className = "Mascot-btn" >
-          <img className="Mascot" src="./Mascot.png" alt="Mascot"/>
+        <button className="Mascot-btn">
+          <img className="Mascot" src="./Mascot.png" alt="Mascot" />
+          <div className="speech-bubble">반가워요 저는 부산소마고의 마스코트 아리에요!  소리는 지금 매점에서 빵을 먹고 있어요<br />이 웹페이지는 소마고의 홍보 영상들을 모아놓은 곳이에요 재밌게 신청해주세요 !!</div>
         </button>
       </div>
 
-    <div
-      className="video-section"
-      style={{
-        display: "flex",
-        justifyContent: "center",
-        alignItems: "flex-start",
-        gap: "20px",
-      }}
-    >
-      <div className="video-wrapper">
-        <video
-          className="Video"
-          ref={videoRef}
-          src={`/홍보영상_${selectedResolution}.mp4`}
-          type="video/mp4"
-        />
-      </div>
-
       <div
-        className="side-videos"
+        className="video-section"
         style={{
           display: "flex",
-          flexDirection: "column",
-          gap: "10px",
+          justifyContent: "center",
+          alignItems: "flex-start",
+          gap: "20px",
         }}
       >
-
-        <div className="Video1">
-          <img
-            src="./Video1.png"
-            alt="Video1"
-            style={{ width: "281px", borderRadius: "10px" }}
+        <div className="video-wrapper">
+          <video
+            className="Video"
+            ref={videoRef}
+            src={`/${currentVideo}_${selectedResolution}.mp4`}
+            type="video/mp4"
           />
-          <p>2025 BSSM 졸업작품전</p>
         </div>
 
-        <div className="Video2">
-          <img
-            src="./Video2.png"
-            alt="Video2"
-            style={{ width: "281px", borderRadius: "10px" }}
-          />
-          <p>2025 BSSM 졸업작품 홍보 영상</p>
-        </div>
+        <div
+          className="side-videos"
+          style={{
+            display: "flex",
+            flexDirection: "column",
+            gap: "10px",
+          }}
+        >
+          <div className="Video1" onClick={() => changeVideo("졸작홍보")}>
+            <img
+              src="./Video2.png"
+              alt="Video1"
+              style={{
+                width: "281px",
+                borderRadius: "10px",
+                cursor: "pointer",
+              }}
+            />
+            <p>2025 BSSM 졸업작품 홍보 영상</p>
+          </div>
 
-        <div className="Video3">
-          <img
-            src="./Video3.png"
-            alt="Video3"
-            style={{ width: "281px", borderRadius: "10px" }}
-          />
-          <p>2021 BSSM 홍보 영상</p>
-        </div>
+          <div className="Video2" onClick={() => changeVideo("홍보영상1")}>
+            <img
+              src="./Video3.png"
+              alt="Video2"
+              style={{
+                width: "281px",
+                borderRadius: "10px",
+                cursor: "pointer",
+              }}
+            />
+            <p>2021 BSSM 홍보 영상</p>
+          </div>
 
+          <div className="Video3" onClick={() => changeVideo("홍보영상")}>
+            <img
+              src="./Video.png"
+              alt="Video3"
+              style={{
+                width: "281px",
+                borderRadius: "10px",
+                cursor: "pointer",
+              }}
+            />
+            <p>2025 BSSM 홍보 영상</p>
+          </div>
+        </div>
       </div>
-    </div>
 
       <div className="video-controls">
         <button onClick={toggleMute}>
@@ -211,10 +248,33 @@ export default function VideoPlayer() {
               {resolutions.map((res) => (
                 <div
                   key={res}
-                  className={`resolution-item ${selectedResolution === res ? "active" : ""}`}
+                  className={`resolution-item ${
+                    selectedResolution === res ? "active" : ""
+                  }`}
                   onClick={() => handleResolutionSelect(res)}
                 >
                   {res}p
+                </div>
+              ))}
+            </div>
+          )}
+        </div>
+
+        <div style={{ position: "relative", display: "inline-block" }}>
+          <button onClick={() => setSpeedMenuOpen(!speedMenuOpen)}>
+            <img className="Time" src="./Time.png" alt="Speed" />
+          </button>
+          {speedMenuOpen && (
+            <div className="speed-menu">
+              {speeds.map((speed) => (
+                <div
+                  key={speed}
+                  className={`speed-item ${
+                    selectedSpeed === speed ? "active" : ""
+                  }`}
+                  onClick={() => handleSpeedSelect(speed)}
+                >
+                  {speed}x
                 </div>
               ))}
             </div>
@@ -243,21 +303,20 @@ export default function VideoPlayer() {
           )}
         </button>
 
-          <button
-            className={`like-btn ${isLiked ? "liked" : "like"}`}
-            onClick={handleLike}
-          >
-            <img className="like-img" src="./like.png" alt="like" />
-            {likeCount.toFixed(1)}만
-          </button>
+        <button
+          className={`like-btn ${isLiked ? "liked" : "like"}`}
+          onClick={handleLike}
+        >
+          <img className="like-img" src="./like.png" alt="like" />
+          {likeCount.toFixed(1)}만
+        </button>
 
-
-          <button
-            className={`unlike-btn ${isUnliked ? "unliked" : "unlike"}`}
-            onClick={handleUnlike}
-          >
-            <img className="unlike-img" src=" /Unlike.png" alt="unlike" />
-          </button>
+        <button
+          className={`unlike-btn ${isUnliked ? "unliked" : "unlike"}`}
+          onClick={handleUnlike}
+        >
+          <img className="unlike-img" src="./Unlike.png" alt="unlike" />
+        </button>
 
         <button
           className="flag-btn"
@@ -270,13 +329,10 @@ export default function VideoPlayer() {
             }
           }}
         >
-          <img className="flag-img" src="./flag.png" alt="flag" />신고
+          <img className="flag-img" src="./flag.png" alt="flag" />
+          신고
         </button>
       </div>
-
-  
-
-
     </div>
   );
 }

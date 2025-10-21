@@ -66,3 +66,31 @@ button:focus-visible {
     background-color: #f9f9f9;
   }
 }
+
+.speech-bubble {
+  position: absolute;
+  top: 50%;
+  right: 4%; 
+  transform: translateY(-50%);
+  background: #f0f0f0;
+  color: #333;
+  padding: 10px 15px;
+  border-radius: 12px;
+  font-size: 14px;
+  line-height: 1.4;
+  box-shadow: 0 4px 8px rgba(0,0,0,0.2);
+  white-space: nowrap;
+  margin-right: 10px; 
+}
+
+
+.speech-bubble::after {
+  content: "";
+  position: absolute;
+  top: 70%;
+  right: -22px; 
+  transform: translateY(-50%);
+  border-width: 8px;
+  border-style: solid;
+  border-color: transparent transparent transparent #f0f0f0;
+}
