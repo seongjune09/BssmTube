@@ -124,7 +124,7 @@ const handleResolutionSelect = (res) => {
 ---
 
 # 🔗 배포 링크
-[🌐 BsTube 바로가기](https://bssmtube.vercel.app/) *(맥북 화면 기준  [2880 x 1864])*
+[🌐 BssmTube 바로가기](https://bssmtube.vercel.app/) *(맥북 화면 기준  [2880 x 1864])*
 
 ---
 
