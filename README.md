@@ -1,4 +1,4 @@
-# 🎬 BsTube
+# 🎬 BssmTube
 <img width="1470" height="826" alt="image" src="https://github.com/user-attachments/assets/eac4dabf-ada5-41dd-ae87-d6976181d471" /> <br>
 
 📅 2025.10.14 ~ 2025.10.21
@@ -128,7 +128,7 @@ const handleResolutionSelect = (res) => {
 
 ---
 
-# [▶ 시연영상 확인하기]()
+# [▶ 시연영상 확인하기](https://www.youtube.com/watch?v=1ryhrt201qw)
 
 ---
 
