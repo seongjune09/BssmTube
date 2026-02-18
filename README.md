@@ -128,7 +128,7 @@ const handleResolutionSelect = (res) => {
 
 ---
 
-# [▶ 시연영상 확인하기](https://www.youtube.com/watch?v=1ryhrt201qw)
+# [▶ 시연 영상 확인하기](https://www.youtube.com/watch?v=1ryhrt201qw)
 
 ---
 
