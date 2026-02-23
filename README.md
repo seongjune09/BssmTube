@@ -51,7 +51,7 @@ const handleResolutionSelect = (res) => {
 
 ---
 
-(3) 키보드 단축키
+**(3) 키보드 단축키**
 * `useEffect`와 `addEventListener`로 전역 키보드 이벤트 처리
 * Space: 재생/일시정지
 * ← →: 5초 건너뛰기
