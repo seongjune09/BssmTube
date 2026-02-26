@@ -11,7 +11,7 @@ React 수업 시간에 진행한 React 활용 과제입니다.
 
 ---
 
-# ⚙️ 기술적 구현
+# 기술적 구현
 
 **(1) 비디오 제어 시스템**
 재생/일시정지
@@ -108,7 +108,7 @@ const handleResolutionSelect = (res) => {
 
 ---
 
-# 👍🏻 느낀 점 및 배운 점
+# 🍀 느낀 점 및 배운 점
 이번 프로젝트를 진행하며 react의 useRef와 useState를 활용한 상태 관리 및 DOM 제어를 경험했습니다.
 비디오 API(play(), pause(), currentTime 등)를 직접 다루며 미디어 제어 기술에 대한 이해도를 높였습니다.
 수업 시간에 배운 기본적인 영상 제어 기능을 넘어 해상도 변경, 재생속도 조절, 키보드 단축키 등 실제 영상 플랫폼 수준의 기능을 구현하며 새로운 기술을 접해보며 흥미가 생겼으며
@@ -117,13 +117,13 @@ const handleResolutionSelect = (res) => {
 
 ---
 
-# 🛠 기술 스택
+# 기술 스택
 
 <img height="40" src="https://raw.githubusercontent.com/devicons/devicon/master/icons/react/react-original.svg" />   
 
 ---
 
-# 🔗 배포 링크
+# 배포 링크
 [🌐 BssmTube 바로가기](https://bssmtube.vercel.app/) *(맥북 화면 기준  [2880 x 1864])*
 
 ---
